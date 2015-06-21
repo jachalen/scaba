@@ -1,8 +1,6 @@
-package de.scaba.example
+package scaba.example
 
-import de.scaba._
-import de.scaba.BBN._
-
+import scaba._
 
 /**
  *

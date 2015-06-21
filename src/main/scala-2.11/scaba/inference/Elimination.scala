@@ -1,7 +1,7 @@
-package de.scaba.inference
+package scaba.inference
 
-import de.scaba._
-import de.scaba.BBN._
+import scaba._
+import scaba.BBN._
 
 case class Factor(vars: List[Node], keys: List[List[Event]]) {
   def this(vars: List[Node]) = { this(vars, Factor.createKeys(vars)) }
@@ -287,7 +287,7 @@ object Factor {
   implicit def seqEv2QueryCondition(l: List[Event]): QueryCondition = QueryCondition(l)
 }
 
-object Elimination2 extends InferenceAlg {
+object Elimination extends InferenceAlg {
   def apply(bbn: BBN, node: Node, evidence: Event*): List[Tuple2[Symbol, Double]] = {
     val xres = eliminationAsk(bbn, node, evidence: _*)
     val r = xres.keys.map(x => (x.head, xres(x))).sortWith(

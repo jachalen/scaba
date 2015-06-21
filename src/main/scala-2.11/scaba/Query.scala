@@ -1,4 +1,4 @@
-package de.scaba
+package scaba
 
 /**
  * Created by CptChaos on 6/2/2015.

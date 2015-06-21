@@ -1,4 +1,4 @@
-package de.scaba
+package scaba
 
 import scala.collection.mutable
 

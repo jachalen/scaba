@@ -1,7 +1,7 @@
-package de.scaba.example
+package scaba.example
 
-import de.scaba._
-import de.scaba.inference._
+import scaba._
+import scaba.inference._
 
 object Test extends App {
   test()
@@ -96,7 +96,7 @@ object Test extends App {
         )
     val algs = List[InferenceAlg]( 
         Enumeration,// Elimination, 
-        Elimination2)
+        Elimination)
    //test2( algs, queries, 100)
     System.out.println("Starting...");
     Thread.sleep(100)

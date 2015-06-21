@@ -1,4 +1,4 @@
-package de.scaba
+package scaba
 
 object Util {
   def normalize(l: List[Tuple2[Symbol, Double]]): List[Tuple2[Symbol, Double]] = {

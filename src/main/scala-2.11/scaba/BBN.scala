@@ -1,7 +1,7 @@
-package de.scaba
+package scaba
 
 import scala.collection.mutable
-import de.scaba.inference._
+import scaba.inference._
 
 
 

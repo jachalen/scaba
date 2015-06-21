@@ -1,6 +1,6 @@
-package de.scaba.inference
+package scaba.inference
 
-import de.scaba._
+import scaba._
 
 //import BBN._
 

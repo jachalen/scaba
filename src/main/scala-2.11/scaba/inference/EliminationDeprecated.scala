@@ -1,6 +1,6 @@
-package de.scaba.inference
+package scaba.inference
 
-import de.scaba._
+import scaba._
 
 
 
@@ -8,7 +8,7 @@ import de.scaba._
  * @author CptChaos
  *
  */
-object Elimination extends InferenceAlg {
+object EliminationDeprecated extends InferenceAlg {
   def apply(bbn: BBN, node: Node, evidence: Event*): List[Tuple2[Symbol, Double]] = {
     //println("Elimination")
 

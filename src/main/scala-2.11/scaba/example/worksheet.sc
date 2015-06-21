@@ -1,9 +1,11 @@
-import de.scaba._
+import scaba._
 
-/*
-
+/**
+ * Demo worksheet usage
+ *
+ * Scaba (c) 2015 Jan Charles Lenk
+ * @author jan.charles.lenk@gmail.com
  */
-
 object AlarmWorksheet extends BBN {
   name = "Alarm"
   println("Ji")

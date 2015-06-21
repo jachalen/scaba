@@ -1,6 +1,4 @@
-package de
-
-import de.scaba.inference.Enumeration
+import scaba.inference.Enumeration
 
 import scala.collection.mutable
 
@@ -30,8 +28,8 @@ import scala.collection.mutable
  * implicit val bbn = test
  * 'A:=('t,'f)
  * 'B:=('t,'f)
- * P('A)++=(ง -> %(0.2,0.8))
- * P('B | 'A) ++= ((ง('A<<'t)-> %(0.1,0.9)),(ง('A<<'f)-> %(0.6,0.4)))
+ * P('A)++=(ยง -> %(0.2,0.8))
+ * P('B | 'A) ++= ((ยง('A<<'t)-> %(0.1,0.9)),(ยง('A<<'f)-> %(0.6,0.4)))
  * P('B | 'A) += (1 -> %(0.2,0.8))
  * P('A | 'B << 't)
  */
