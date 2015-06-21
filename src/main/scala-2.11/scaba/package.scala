@@ -1,5 +1,4 @@
 import scaba.inference.Enumeration
-
 import scala.collection.mutable
 
 /**

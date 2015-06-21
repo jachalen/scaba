@@ -1,11 +1,19 @@
 package scaba.example
 
+/**
+ * ScaBa - A Scala implementation for Discrete Baysian (Belief) Networks
+ *
+ * (c) 2015 Jan Charles Lenk
+ *
+ * Licensed under LGPL
+ *
+ *
+ * @author jan.charles.lenk@gmail.com
+ */
+
 import scaba._
 
-/**
- *
- * @author
- */
+
 object Alarm extends BBN {
   name="Alarm"
   'Burglary := ('True, 'False) 

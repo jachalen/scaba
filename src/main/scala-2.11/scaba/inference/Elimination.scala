@@ -1,7 +1,16 @@
+/**
+ * ScaBa - A Scala implementation for Discrete Baysian (Belief) Networks
+ *
+ * (c) 2015 Jan Charles Lenk
+ *
+ * Licensed under LGPL
+ *
+ *
+ * @author jan.charles.lenk@gmail.com
+ */
 package scaba.inference
 
 import scaba._
-import scaba.BBN._
 
 case class Factor(vars: List[Node], keys: List[List[Event]]) {
   def this(vars: List[Node]) = { this(vars, Factor.createKeys(vars)) }

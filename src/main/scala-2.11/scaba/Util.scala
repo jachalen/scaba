@@ -1,3 +1,13 @@
+/**
+ * ScaBa - A Scala implementation for Discrete Baysian (Belief) Networks
+ *
+ * (c) 2015 Jan Charles Lenk
+ *
+ * Licensed under LGPL
+ *
+ *
+ * @author jan.charles.lenk@gmail.com
+ */
 package scaba
 
 object Util {

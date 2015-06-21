@@ -1,22 +1,27 @@
 package scaba
+/**
+ * ScaBa - A Scala implementation for Discrete Baysian (Belief) Networks
+ *
+ * (c) 2015 Jan Charles Lenk
+ *
+ * Licensed under LGPL
+ *
+ *
+ * @author jan.charles.lenk@gmail.com
+ */
+
 
 import scala.collection.mutable
 import scaba.inference._
 
-
-
-
-
-
-
-
-
-
-
+/**
+ * Main class for Bayesian Belief Networks (BBNs)
+ */
 class BBN {
   implicit val bbn = this
   var name:String =null
   var nodes = mutable.Map[Symbol, Node]()
+
 
   def P(n: Node) = {
     if (!n.table.isEmpty) n.table.clear()

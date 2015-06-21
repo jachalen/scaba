@@ -1,6 +1,18 @@
+/**
+ * ScaBa - A Scala implementation for Discrete Baysian (Belief) Networks
+ *
+ * (c) 2015 Jan Charles Lenk
+ *
+ * Licensed under LGPL
+ *
+ *
+ * @author jan.charles.lenk@gmail.com
+ */
 package scaba
 
 import scala.collection.mutable
+
+
 
 class Node(val bbn: BBN, var name: Symbol, var states: List[Symbol]) {
   var parents: List[Node] = List[Node]()
