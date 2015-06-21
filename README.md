@@ -1,63 +1,85 @@
 # scaba
 
-A Scala Implementation for Bayesian Networks
+A Scala Implementation for (Discrete) Bayesian Networks
 
-<code>
-Welcome to Scala version 2.11.6 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_17).
-Type in expressions to have them evaluated.
-Type :help for more information.
+(c) 2015 Jan Charles Lenk, jan.charles.lenk@gmail.com
+Licensed under LGPL.
 
-scala> import scaba._
-import scaba._
-</code>
-scala> implicit val bbn = example.Alarm
-bbn: scaba.example.Alarm.type =
-P('JohnCalls|'Alarm)
-P('Alarm|'Burglary&'Earthquake)
-P('MaryCalls|'Alarm)
-P('Earthquake)
-P('Burglary)
+Scaba is a DSL for Bayesian Networks (or Bayesian Belief Networks, BBN), written in Scala. Create BBNs by using
+proper probabilistic notation from within your programs, worksheets, or the console.
 
-scala> P('Burglary | 'MaryCalls << 'True & 'JohnCalls << 'True)
+Currently implements exact inference algorithms, i.e., variable enumeration and elimination.
 
-res0: List[(Symbol, Double)] = List(('True,0.2841718353643929), ('False,0.7158281646356071))
+Run scaba/examples/Test.scala for an evaluation of both inference algorithms
+See scaba/example/Alarm.scala for the definition of a BBN
+See scaba/example/worksheet.sc for usage in a Scala worksheet example
 
-scala> val test = new BBN
-test: scaba.BBN =
 
-scala> implicit val bbn = test
+Usage on the console:
+ Welcome to Scala version 2.11.6 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_17).
+ Type in expressions to have them evaluated.
+ Type :help for more information.
 
-bbn: scaba.BBN =
+''import the scaba package''
+ scala> import scaba._
+ import scaba._
 
-scala> 'A:=('t,'f)
-'B:=('t,'f)
-res1: scaba.Node = 'A
+''pull the example Alarm BBN into context''
+ scala> implicit val bbn = example.Alarm
+ bbn: scaba.example.Alarm.type =
+ P('JohnCalls|'Alarm)
+ P('Alarm|'Burglary&'Earthquake)
+ P('MaryCalls|'Alarm)
+ P('Earthquake)
+ P('Burglary)
 
-scala> res2: scaba.Node = 'B
+''Perform an inference for Burglary node''
+ scala> P('Burglary | 'MaryCalls << 'True & 'JohnCalls << 'True)
 
-scala> P('A)++=(§ -> %(0.2,0.8))
-P('B | 'A) ++= ((§('A<<'t)-> %(0.1,0.9)),(§('A<<'f)-> %(0.6,0.4)))
+ res0: List[(Symbol, Double)] = List(('True,0.2841718353643929), ('False,0.7158281646356071))
 
-res3: scaba.NodeInfo =
-P('A)
+''Define a new BBN from scratch''
+ scala> val test = new BBN
+ test: scaba.BBN =
 
-        't    'f
-( 0) 0.200 0.800
+''pull new BBN into context''
+ scala> implicit val bbn = test
 
-scala> res4: scaba.NodeInfo =
-P('B|'A)
+ bbn: scaba.BBN =
 
-     'A    't    'f
-( 0) 'f 0.600 0.400
-( 1) 't 0.100 0.900
+''Define to new nodes''
+ scala> 'A:=('t,'f)
+ 'B:=('t,'f)
+ res1: scaba.Node = 'A
 
-scala> P('B | 'A) += (1 -> %(0.2,0.8))
-res5: scaba.NodeInfo =
-P('B|'A)
+ scala> res2: scaba.Node = 'B
 
-     'A    't    'f
-( 0) 'f 0.600 0.400
-( 1) 't 0.200 0.800
+''Define tables and dependencies for the two nodes 'A and 'B. Nodes are defined by Scala Symbols as names.''
+ scala> P('A)++=(§ -> %(0.2,0.8))
+ P('B | 'A) ++= ((§('A<<'t)-> %(0.1,0.9)),(§('A<<'f)-> %(0.6,0.4)))
 
-scala> P('A | 'B << 't)
-res6: List[(Symbol, Double)] = List(('t,0.07692307692307694), ('f,0.923076923076923))
+ res3: scaba.NodeInfo =
+ P('A)
+
+         't    'f
+ ( 0) 0.200 0.800
+
+ scala> res4: scaba.NodeInfo =
+ P('B|'A)
+
+      'A    't    'f
+ ( 0) 'f 0.600 0.400
+ ( 1) 't 0.100 0.900
+
+''Change line 1 for probability table from node 'B''
+ scala> P('B | 'A) += (1 -> %(0.2,0.8))
+ res5: scaba.NodeInfo =
+ P('B|'A)
+
+      'A    't    'f
+ ( 0) 'f 0.600 0.400
+ ( 1) 't 0.200 0.800
+
+''Perform an inference''
+ scala> P('A | 'B << 't)
+ res6: List[(Symbol, Double)] = List(('t,0.07692307692307694), ('f,0.923076923076923))
