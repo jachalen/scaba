@@ -46,6 +46,18 @@ package object scaba {
   implicit def evidence2QueryCondition(e: Event) = QueryCondition(Seq(e))
   implicit def sym2Node(s: Symbol)(implicit bbn:BBN): Node = bbn.getNode(s)
 
+  //implicit def event2Set(e:Event):Set[Event] = Set(e)
+
+  implicit class tableentry( eventSet:Iterable[Event]) {
+    def --> (values:Node=>Seq[Double]):(Set[Event],Node=>Seq[Double]) = (eventSet.toSet,values)
+    def --> (values:Double*):(Set[Event],Node=>Seq[Double]) = this --> %(values: _*)
+  }
+
+  implicit class tableentry2(qc:QueryCondition) extends tableentry(qc.evidences.toSet)
+
+  implicit class tableentrysingle( e:Event) extends tableentry(Set(e))
+
+
   implicit def nodeInfo2Map(t: NodeInfo): mutable.Map[Set[Event], Seq[Double]] = t.m
 
   def P(n: Node)(implicit bbn:BBN) = bbn.P(n)

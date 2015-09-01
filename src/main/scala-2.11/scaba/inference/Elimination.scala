@@ -246,7 +246,7 @@ object Factor {
   def doSum(fl: Seq[Factor]): Factor = {
     var factor = Factor(fl.head.vars, fl.head.keys)
     factor.keys.foreach(
-      k => factor += (k -> fl.map(_(k)).sum))
+      k => factor += (k, fl.map(_(k)).sum))
     factor
   }
   

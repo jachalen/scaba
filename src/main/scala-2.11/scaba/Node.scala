@@ -123,15 +123,17 @@ class Node(val bbn: BBN, var name: Symbol, var states: List[Symbol]) {
     //assert( this.states.size>1, "Cannot create table for "+this+" because it lacks states")
 
     if (this.parents.forall(_.states.size > 1) && this.states.size > 1) {
-      val signatures = getRowSignatures
+      val signatures: List[Set[Event]] = getRowSignatures
       val ptable = NodeInfo(this, this.table)
       for (sig <- signatures) {
         if (this.table.contains(sig)) {
           if (this.table(sig).size != this.states.size) {
-            ptable ++= (§(sig.toList: _*) -> Uniform)
+            //ptable ++= (<>(sig.toList: _*) -> Uniform)
+            ptable ++= sig -> Uniform
           }
         } else {
-          ptable ++= (§(sig.toList: _*) -> Uniform)
+          //ptable ++= (<>(sig.toList: _*) -> Uniform)
+          ptable ++= (sig -> Uniform)
         }
       }
     }
@@ -226,9 +228,10 @@ case class Conditional(n: Node, c: ConditionDeclaration) {
 }
 
 case class NodeInfo(node: Node, m: mutable.Map[Set[Event], Seq[Double]]) {
-  def ++=(kv: Tuple2[Node => Set[Event], Node => Seq[Double]]*): NodeInfo = {
-    val z = for (e <- kv) yield (e._1(node) -> e._2(node))
+  def ++=(kv: Tuple2[ Set[Event], Node=>Seq[Double]]*): NodeInfo = {
+    val z = for (e <- kv) yield (e._1 -> e._2(node))
     m ++= (z)
+
     this
   }
   
@@ -281,18 +284,22 @@ case class NodeInfo(node: Node, m: mutable.Map[Set[Event], Seq[Double]]) {
   }
 }
 
+
 case class %(values: Double*) extends Function[Node, Seq[Double]] {
   def apply(n: Node) = values
 }
+
 
 object Uniform extends (Node => Seq[Double]) {
   def apply(node: Node) = List.fill[Double](node.states.size)(1.0 / node.states.size)
 }
 
-case class §(keys: Event*) extends Function[Node, Set[Event]] {
-  def apply(n: Node) = keys.toSet
-  def ->(f: Node => Seq[Double]): Tuple2[Node => Set[Event], Node => Seq[Double]] = (this, f)
+/*
+case class <>(keys: Event*) extends Function0[Set[Event]] {
+  val set = keys.toSet
+  def apply() = set
+  def ->(f: Node => Seq[Double]): Tuple2[() => Set[Event], Node => Seq[Double]] = (this, f)
 }
 
-object § extends §()
-
+object <> extends <>()
+*/

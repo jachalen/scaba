@@ -70,8 +70,8 @@ scala> res2: scaba.Node = 'B
 
 **Define tables and dependencies for the two nodes 'A and 'B. Nodes are defined by Scala Symbols as names.**
 ```
-scala> P('A)++=(§ -> %(0.2,0.8))
-P('B | 'A) ++= ((§('A<<'t)-> %(0.1,0.9)),(§('A<<'f)-> %(0.6,0.4)))
+scala> P('A)++=(Nil --> (0.2,0.8))
+P('B | 'A) ++= (('A<<'t) --> (0.1,0.9),('A<<'f)--> (0.6,0.4))
 
 res3: scaba.NodeInfo =
 P('A)
