@@ -1,6 +1,6 @@
 name := "de.scaba"
 
-version := "1.0"
+version := "1.0-alpha2"
 
 scalaVersion := "2.11.7"
 
